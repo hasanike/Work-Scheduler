@@ -29,6 +29,35 @@ $(function () {
       }
     }
   };
+  // adds classes to hour boxes based on current time which in turn sets styling
+  function setTime() {
+    for (i = 0; i < hours.length; i++) {
+      if (i > hourIndxex) {
+        hours[i].addClass('future');
+      }
+      if (i === hourIndxex) {
+        hours[i].addClass('present');
+      }
+      if (i < hourIndxex) {
+        hours[i].addClass('past');
+      }
+    }
+  };
+
+  // box styling on page load
+  setTime();
+
+  // set the date at the top of the page 
+  $('#currentDay').text(today.format('dddd MMMM DD, YYYY'));
+
+  // load the data that was saved in the local storage.
+  load();
+
+  // adds event listener to the save buttons on click
+  saveButton.on("click", save);
+
+});
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener
@@ -48,5 +77,5 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 
-});
+
   // use the id in the containing time-block as a key to save the user input in

@@ -12,11 +12,15 @@ $(function () {
   var hourIndex = currentHour - 9;
   var today = dayjs();
 
-// When button clicked using Dom transveral calls data from local storage
-  function save(event) {
-    var btnClicked = $(event.target);
-    localStorage.setItem(btnClicked.parent().attr("id"), JSON.stringify(btnClicked.parent().children().eq(1).val().trim()));
-  };
+  // making the on-click call back function 
+$(".saveBtn").on("click",function(){
+  var time = $(this).parent().attr("id")
+  var value = $(this).siblings(".description").val()
+  localStorage.setItem(time,value)
+})
+
+}
+
 
   // retrieves and then sets text content from local storage
   function load() {

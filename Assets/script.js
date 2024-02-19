@@ -5,7 +5,7 @@ $(function () {
 
 // Using utiliizing JS 
   var currentHour = dayjs().hour();
-  var hourIndex = currentHour - 9;
+
   var today = dayjs();
 
   // making the on-click call back function 
@@ -25,23 +25,23 @@ $(".saveBtn").on("click",function(){
     }
   };
   // adds classes to hour boxes based on current time which in turn sets styling
-  // 
-  // function setTime() {
-  //   for (i = 0; i < hours.length; i++) {
-  //     if (i > hourIndxex) {
-  //       hours[i].addClass('future');
-  //     }
-  //     if (i === hourIndxex) {
-  //       hours[i].addClass('present');
-  //     }
-  //     if (i < hourIndxex) {
-  //       hours[i].addClass('past');
-  //     }
-  //   }
-  // };
-
+  // progratically adding the time colors
+  function setTime() {
+    $(".time-block").each(function(){
+      var blockHour = parseInt($(this).attr("id").split("-")[1])
+      if (blockHour > currentHour) {
+        $(this).addClass('future');
+      }
+      else if (blockHour === currentHour) {
+        $(this).addClass('present');
+      }
+      else {
+        $(this).addClass('past');
+      }
+  }
+  )}
   // box styling on page load
-  // setTime();
+  setTime();
 
   // set the date at the top of the page 
   $('#currentDay').text(today.format('dddd MMMM DD, YYYY'));

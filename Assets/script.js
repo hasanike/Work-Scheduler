@@ -2,9 +2,9 @@
 
 $(function () {
   // Save the button
-  var SaveButton = $(.saveBtn);
+  var SaveButton = $(saveBtn);
   //  Selectors for hours 9-5
-  var hours= [$(#hour-9), $(#hour-10), $(hour-11), $(hour-12), $(hour-13), $(hour-14), $(hour-15), $(hour-16), $(hour-17)]
+  var hours= [$(hour-9), $(hour-10), $(hour-11), $(hour-12), $(hour-13), $(hour-14), $(hour-15), $(hour-16), $(hour-17)]
   // Saved data from local storage
   var saved;
 
@@ -13,6 +13,22 @@ $(function () {
   var hourIndex = currentHour - 9;
   var today = dayjs();
 
+// When button clicked using Dom transveral calls data from local storage
+  function save(event) {
+    var btnClicked = $(event.target);
+    localStorage.setItem(btnClicked.parent().attr("id"), JSON.stringify(btnClicked.parent().children().eq(1).val().trim()));
+  };
+
+  // retrieves and then sets text content from local storage
+  function load() {
+    for (i = 0; i < hours.length; i++) {
+      var getFromStorage = i + 9;
+      saved = localStorage.getItem("hour-" + getFromStorage);
+      if (saved !== null) {
+        hours[i].children().eq(1).text(JSON.parse(saved));
+      }
+    }
+  };
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage. HINT: What does `this` reference in the click listener

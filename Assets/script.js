@@ -25,7 +25,6 @@ $(".saveBtn").on("click",function(){
     }
   };
   // adds classes to hour boxes based on current time which in turn sets styling
-  // progratically adding the time colors
   function setTime() {
     $(".time-block").each(function(){
       var blockHour = parseInt($(this).attr("id").split("-")[1])
@@ -48,7 +47,7 @@ $(".saveBtn").on("click",function(){
 
   // load the data that was saved in the local storage.
   load();
-
-  // adds event listener to the save buttons on click
+  // listents to changes for the time. every 30 seconds
+setInterval(setTime,30000)
 
 });
